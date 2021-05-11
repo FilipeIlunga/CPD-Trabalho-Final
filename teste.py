@@ -21,29 +21,12 @@ def switch(menu, handler, saida):
            
             break
         elif menu == 3:
-            print("Listagem de artigos com palavra consultada no título.\n")
+            print("Listagem de candidatos por cargo Disputado.\n")
             saida.write(
                 "Listagem de artigos com palavra consultada no título.\n")
 
-            title(handler, input("Palavra: "), saida)
+            cargo(handler, input("Cargo procurado: "), saida)
             break
-        elif menu == 4:
-            print(
-                "Listagem ordenado por autor, do número de artigos do autor nessa área.\n")
-            saida.write(
-                "Listagem ordenado por autor, do número de artigos do autor nessa área.\n")
-
-            area(handler, input("Area: "), saida)
-            break
-        elif menu == 5:
-            print("Listagem por ano.\n")
-            saida.write("Listagem por ano.\n")
-
-            year(handler, input("Ano: "), saida)
-            break
-        else:
-            print("Valor inválido, tente novamente.")
-            return 0
     if menu == 0:
         print("TCHAU!\n")
         saida.write("Arquivo Fechado.\n")
@@ -51,7 +34,7 @@ def switch(menu, handler, saida):
 
     return 0
 
-def candidato(name_archive, word_author, exit):
+def candidato(name_archive, nomeCandidato, exit):
     #função lê o arquivo e retorna os dados do autor
     #Função printa dados do autor.
     list_art = []
@@ -59,10 +42,8 @@ def candidato(name_archive, word_author, exit):
     f = open(name_archive + "data_candidato_index.bin", 'rb')
 
     tree = pickle.load(f)
-
-    word_author = word_author.lower()
-
-    list_art = list_candidato(word_author, tree, name_archive)
+    nomeCandidato = nomeCandidato.lower()
+    list_art = list_candidato(nomeCandidato, tree, name_archive)
 
     print_list(list_art,exit)
 
@@ -73,18 +54,36 @@ def candidato(name_archive, word_author, exit):
     f.close()
 
 
-def ocupacao(name_archive, word_author, exit):
-    #função lê o arquivo e retorna os dados do autor
-    #Função printa dados do autor.
+def ocupacao(name_archive, ocupacaoCandidato, exit):
     list_art = []
 
     f = open(name_archive + "data_ocupacao_index.bin", 'rb')
 
     tree = pickle.load(f)
 
-    word_author = word_author.lower()
+    ocupacaoCandidato = ocupacaoCandidato.lower()
 
-    list_art = list_candidato_ocupacao(word_author, tree, name_archive)
+    list_art = list_candidato_ocupacao(ocupacaoCandidato, tree, name_archive)
+
+    print_list(list_art, exit)
+
+    if list_art != None:
+        for i in list_art:
+            r = i.__repr__()
+            exit.write(r + "\n")
+    f.close()
+
+
+def cargo(name_archive, cargoCandidato, exit):
+    #função lê o arquivo e retorna os dados do autor
+    #Função printa dados do autor.
+    list_art = []
+
+    f = open(name_archive + "data_cargo_index.bin", 'rb')
+
+    tree = pickle.load(f)
+    cargoCandidato = cargoCandidato.lower()
+    list_art = list_candidato_cargo(cargoCandidato, tree, name_archive)
 
     print_list(list_art, exit)
 
