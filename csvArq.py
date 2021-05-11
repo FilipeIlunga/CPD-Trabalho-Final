@@ -196,31 +196,6 @@ def search_candidato(offset, name_file):
     return r
 
 
-def search_ocupacao(offset, name_file):
-
-    handler = open(name_file + 'Data.bin', 'rb')
-    for i in range(offset):
-        pickle.load(handler)
-
-    r = pickle.load(handler)
-
-    handler.close()
-
-    return r
-
-
-def search_cargo(offset, name_file):
-
-    handler = open(name_file + 'Data.bin', 'rb')
-    for i in range(offset):
-        pickle.load(handler)
-
-    r = pickle.load(handler)
-
-    handler.close()
-
-    return r
-
 def list_candidato(word, tree, name_file):
     n = []
     candidatos = []
@@ -257,7 +232,7 @@ def list_candidato_cargo(word, tree, name_file):
 
     if n[0]:
         for i in n[1].offsets:
-            candidatos.append(search_cargo(i, name_file))
+            candidatos.append(search_candidato(i, name_file))
         return candidatos
     else:
         return None
@@ -277,7 +252,7 @@ def list_candidato_ocupacao(word, tree, name_file):
 
     if n[0]:
         for i in n[1].offsets:
-            candidatos.append(search_ocupacao(i, name_file))
+            candidatos.append(search_candidato(i, name_file))
         return candidatos
     else:
         return None
