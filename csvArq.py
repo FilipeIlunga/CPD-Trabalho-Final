@@ -162,7 +162,10 @@ def make_index_files(lista_registros, handler):
         for partido in nomePartido:
             trie_partido.AddNodeWord(partido, registro.offset)
 
-        trie_ocupacao.AddNodeWord(registro.ocupacao.lower(), registro.offset)
+        ocupacaoCandidato = registro.ocupacao  # pega o título do artigo
+        ocupacaoN = normalize(ocupacaoCandidato)
+        for word in ocupacaoN:
+            trie_ocupacao.AddNodeWord(word, registro.offset)
 
         trie_cargo.AddNodeWord(str(registro.cargo), registro.offset)
 
@@ -178,6 +181,19 @@ def make_index_files(lista_registros, handler):
 
 
 def search_candidato(offset, name_file):
+
+    handler = open(name_file + 'Data.bin', 'rb')
+    for i in range(offset):
+        pickle.load(handler)
+
+    r = pickle.load(handler)
+
+    handler.close()
+
+    return r
+
+
+def search_ocupacao(offset, name_file):
 
     handler = open(name_file + 'Data.bin', 'rb')
     for i in range(offset):
@@ -210,6 +226,27 @@ def list_candidato(word, tree, name_file):
         return None
 
 
+def list_candidato_ocupacao(word, tree, name_file):
+    n = []
+    candidatos = []
+
+    #a função search precisa do código obtido com a função hash
+    # coloca string na função hash, (Unicode-objects must be encoded before hashing)
+    hash_w = hashlib.md5(word.encode())
+    # Devolve o código em hexadecimal, transforma em inteiro e então em bits (string)
+    hash_w_bin = bin(int(hash_w.hexdigest(), 16))
+    hash_w_bin = hash_w_bin[2:]
+
+    n = tree.search(hash_w_bin)
+
+    if n[0]:
+        for i in n[1].offsets:
+            candidatos.append(search_ocupacao(i, name_file))
+        return candidatos
+    else:
+        return None
+
+
 
 def insertion_sort(lista_registro):
     for i in range(len(lista_registro)):
@@ -220,7 +257,7 @@ def insertion_sort(lista_registro):
             j -= 1
         lista_registro[j] = iterator
 
-def print_list(lista_registros):
+def print_list(lista_registros,exit):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
@@ -240,4 +277,15 @@ def print_list(lista_registros):
             print("Ocupação: %s\n" % (registro.ocupacao))
             print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
             print("===========================\n")
+     
+
+           # exit.write("Nome: %s\n" % (registro.nome))
+           # exit.write("Cargo Disputado: %s\n" % (registro.cargo))
+           # exit.write("Partido: %s\n" % (registro.nomePartido))
+           # exit.write("Idade: %s\n" % (registro.genero))
+           # exit.write("Gênero: %s\n" % (registro.Idade))
+           # exit.write("Instrução: %s\n" % (registro.grauInstrucao))
+           # exit.write("Ocupação: %s\n" % (registro.ocupacao))
+           # exit.write("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
+           # exit.write("===========================\n")
 

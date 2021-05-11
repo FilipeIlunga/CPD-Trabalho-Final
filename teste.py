@@ -6,49 +6,48 @@ from csvArq import *
 # ==================================================================================================================================
 
 
-def switch(menu, handler, exit):
+def switch(menu, handler, saida):
     #implementação de menu com iteração caso usuário faça escolhas erradas.
     while menu != 0:
         if menu == 1:
-            print("Listagem de artigos de um autor.\n")
-            exit.write("Listagem de artigos de um autor.\n")
+            print("Listagem de candidatos.\n")
+            saida.write("Listagem de candidatos.\n")
 
-            candidato(handler, input("Nome procurado: "), exit)
+            candidato(handler, input("Nome procurado: "), saida)
             break
         elif menu == 2:
-            print("Listagem de artigos de um conjunto de candidatos.\n")
-            exit.write("Listagem de artigos de um conjunto de candidatos.\n")
-
-          
+            print("Lista Candidatos por ocupacao.\n")
+            ocupacao(handler, input("Profissão: "), saida)
+           
             break
         elif menu == 3:
             print("Listagem de artigos com palavra consultada no título.\n")
-            exit.write(
+            saida.write(
                 "Listagem de artigos com palavra consultada no título.\n")
 
-            title(handler, input("Palavra: "), exit)
+            title(handler, input("Palavra: "), saida)
             break
         elif menu == 4:
             print(
                 "Listagem ordenado por autor, do número de artigos do autor nessa área.\n")
-            exit.write(
+            saida.write(
                 "Listagem ordenado por autor, do número de artigos do autor nessa área.\n")
 
-            area(handler, input("Area: "), exit)
+            area(handler, input("Area: "), saida)
             break
         elif menu == 5:
             print("Listagem por ano.\n")
-            exit.write("Listagem por ano.\n")
+            saida.write("Listagem por ano.\n")
 
-            year(handler, input("Ano: "), exit)
+            year(handler, input("Ano: "), saida)
             break
         else:
             print("Valor inválido, tente novamente.")
             return 0
     if menu == 0:
         print("TCHAU!\n")
-        exit.write("Arquivo Fechado.\n")
-        exit.close()
+        saida.write("Arquivo Fechado.\n")
+        saida.close()
 
     return 0
 
@@ -65,25 +64,35 @@ def candidato(name_archive, word_author, exit):
 
     list_art = list_candidato(word_author, tree, name_archive)
 
-    print_list(list_art)
+    print_list(list_art,exit)
 
     if list_art != None:
         for i in list_art:
             r = i.__repr__()
             exit.write(r + "\n")
-
     f.close()
 
-def verify_entry(nomedaentrada):
-    try:
-        entrada = open(nomedaentrada+"data_candidato_index.bin", "wb")
-        print("\nArquivo já processado anteriormente\n")
-        entrada.close()
-        return True
-    except:
-        print("\nArquivo novo.\nVamos processar o arquivo pela primeira vez.\nAguarde\n")
-        return False
 
+def ocupacao(name_archive, word_author, exit):
+    #função lê o arquivo e retorna os dados do autor
+    #Função printa dados do autor.
+    list_art = []
+
+    f = open(name_archive + "data_ocupacao_index.bin", 'rb')
+
+    tree = pickle.load(f)
+
+    word_author = word_author.lower()
+
+    list_art = list_candidato_ocupacao(word_author, tree, name_archive)
+
+    print_list(list_art, exit)
+
+    if list_art != None:
+        for i in list_art:
+            r = i.__repr__()
+            exit.write(r + "\n")
+    f.close()
 
 def test():
     try:
