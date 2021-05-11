@@ -10,20 +10,20 @@ def switch(menu, handler, saida):
     #implementação de menu com iteração caso usuário faça escolhas erradas.
     while menu != 0:
         if menu == 1:
-            print("Listagem de candidatos.\n")
-            saida.write("Listagem de candidatos.\n")
+            print("Listagem de candidatos por nome.\n")
+            saida.write("Listagem de candidatos nome.\n")
 
             candidato(handler, input("Nome procurado: "), saida)
             break
         elif menu == 2:
-            print("Lista Candidatos por ocupacao.\n")
+            print("Lista Candidatos por profissão.\n")
             ocupacao(handler, input("Profissão: "), saida)
            
             break
         elif menu == 3:
             print("Listagem de candidatos por cargo Disputado.\n")
             saida.write(
-                "Listagem de artigos com palavra consultada no título.\n")
+                "Listagem de candidatos por cargo Disputado.\n")
 
             cargo(handler, input("Cargo procurado: "), saida)
             break
@@ -75,8 +75,7 @@ def ocupacao(name_archive, ocupacaoCandidato, exit):
 
 
 def cargo(name_archive, cargoCandidato, exit):
-    #função lê o arquivo e retorna os dados do autor
-    #Função printa dados do autor.
+
     list_art = []
 
     f = open(name_archive + "data_cargo_index.bin", 'rb')
@@ -151,9 +150,8 @@ menu = 1
 while menu != 0:
     print("Escolha uma das opções abaixo:\n\n")
     print("[1] Buscar Candidato.\n")
-    print("[2] Listagem de cargos disputados.\n")
-    print("[3] Listagem de candidatos por partido.\n")
-    print("[4] Listagem de candidatos por ocupação.\n")
+    print("[2] Listagem de candidatos por ocupação.\n")
+    print("[3] Listagem de cargos disputados..\n")
     menu = int(input())
     switch(menu, handler, saida)
     input()
