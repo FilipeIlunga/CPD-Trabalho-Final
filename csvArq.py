@@ -16,25 +16,29 @@ class Register(object):
         self.offset = offset
      
         self.nascimento = info[0]
-        self.cargo = info[1]
-        self.numero = info[2]
-        self.nome = info[3]
-        self.cpf = info[4]
-        self.numeroPartido = info[5]
-        self.siglaPartido = info[6]
-        self.nomePartido = info[7]
-        self.municipioNascimento = info[8]
-        self.dataNascimento= info[9]
-        self.Idade = info[10]
-        self.genero = info[11]
-        self.grauInstrucao = info[12]
-        self.cor = info[13]
-        self.ocupacao = info[14]
-        self.situacaoPosEleicao = info[15]
+        self.CODcargo = int(info[1],10)
+        self.cargo = info[2]
+        self.numero = info[3]
+        self.nome = info[4]
+        self.cpf = info[5]
+        self.numeroPartido = info[6]
+        self.siglaPartido = info[7]
+        self.nomePartido = info[8]
+        self.municipioNascimento = info[9]
+        self.dataNascimento= info[10]
+        self.Idade = info[11]
+        self.CODgenero = int(info[12],10)
+        self.genero = info[13]
+        self.CODgrauInstrucao = int(info[14],10)
+        self.grauInstrucao = info[15]
+        self.cor = info[16]
+        self.ocupacao = info[17]
+        self.CODsituacaoPosEleicao = int(info[18],10)
+        self.situacaoPosEleicao = info[19]
 ########
 
     def __repr__(self):
-        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.nascimento), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.genero), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.situacaoPosEleicao))
+        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.nascimento), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
 
 class NodeTrie(object):
     def __init__(self, value, children_right=None, children_left=None, offsets=[], rest_word=[]):
@@ -119,24 +123,6 @@ def normalize(title):
     return word_list
 
 
-def intercession(listas):
-    result = []
-    a = listas[0]
-    if len(listas[1:]) > 0:
-        b = listas[1]
-        for obj in a:
-            if obj in b:
-                result.append(obj)
-        if len(listas[2:]) > 0:
-            c = listas[2:]
-            c.append(result)
-            return intercession(c)
-        else:
-            return result
-    else:
-        return result
-
-
 # monta arquivos invertidos, que armazenam os indices em árvores Trie.
 def make_index_files(lista_registros, handler):
     trie_candidato = NodeTrie(None, offsets=[])
@@ -216,54 +202,11 @@ def list_candidato(word, tree, name_file):
     else:
         return None
 
-
-def list_candidato_cargo(word, tree, name_file):
-    n = []
-    candidatos = []
-
-    #a função search precisa do código obtido com a função hash
-    # coloca string na função hash, (Unicode-objects must be encoded before hashing)
-    hash_w = hashlib.md5(word.encode())
-    # Devolve o código em hexadecimal, transforma em inteiro e então em bits (string)
-    hash_w_bin = bin(int(hash_w.hexdigest(), 16))
-    hash_w_bin = hash_w_bin[2:]
-
-    n = tree.search(hash_w_bin)
-
-    if n[0]:
-        for i in n[1].offsets:
-            candidatos.append(search_candidato(i, name_file))
-        return candidatos
-    else:
-        return None
-
-def list_candidato_ocupacao(word, tree, name_file):
-    n = []
-    candidatos = []
-
-    #a função search precisa do código obtido com a função hash
-    # coloca string na função hash, (Unicode-objects must be encoded before hashing)
-    hash_w = hashlib.md5(word.encode())
-    # Devolve o código em hexadecimal, transforma em inteiro e então em bits (string)
-    hash_w_bin = bin(int(hash_w.hexdigest(), 16))
-    hash_w_bin = hash_w_bin[2:]
-
-    n = tree.search(hash_w_bin)
-
-    if n[0]:
-        for i in n[1].offsets:
-            candidatos.append(search_candidato(i, name_file))
-        return candidatos
-    else:
-        return None
-
-
-
 def insertion_sort(lista_registro):
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
         j = i
-        while j > 0 and iterator.nome < lista_registro[j-1].nome:
+        while j > 0 and iterator.CODgenero > lista_registro[j - 1].CODgenero:
             lista_registro[j] = lista_registro[j-1]
             j -= 1
         lista_registro[j] = iterator
@@ -272,24 +215,23 @@ def print_list(lista_registros,exit):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-        if(len(lista_registros) > 15):
+        if(len(lista_registros) == 2000000000000000000):
             sorted(lista_registros, key=lambda Register: Register.nome.lower())
         else:
             insertion_sort(lista_registros)
 
         for registro in lista_registros:
-
+            
             print("Nome: %s\n" % (registro.nome))
             print("Cargo Disputado: %s\n" % (registro.cargo))
             print("Partido: %s\n" % (registro.nomePartido))
-            print("Idade: %s\n" % (registro.genero))
-            print("Gênero: %s\n" % (registro.Idade))
+            print("Gênero: %s\n" % (registro.genero))
+            print("Idade: %s\n" % (registro.Idade))
             print("Instrução: %s\n" % (registro.grauInstrucao))
             print("Ocupação: %s\n" % (registro.ocupacao))
             print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
             print("===========================\n")
      
-
            # exit.write("Nome: %s\n" % (registro.nome))
            # exit.write("Cargo Disputado: %s\n" % (registro.cargo))
            # exit.write("Partido: %s\n" % (registro.nomePartido))

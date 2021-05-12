@@ -11,8 +11,7 @@ def switch(menu, handler, saida):
     while menu != 0:
         if menu == 1:
             print("Listagem de candidatos por nome.\n")
-            saida.write("Listagem de candidatos nome.\n")
-
+            
             candidato(handler, input("Nome procurado: "), saida)
             break
         elif menu == 2:
@@ -63,7 +62,7 @@ def ocupacao(name_archive, ocupacaoCandidato, exit):
 
     ocupacaoCandidato = ocupacaoCandidato.lower()
 
-    list_art = list_candidato_ocupacao(ocupacaoCandidato, tree, name_archive)
+    list_art = list_candidato(ocupacaoCandidato, tree, name_archive)
 
     print_list(list_art, exit)
 
@@ -82,7 +81,7 @@ def cargo(name_archive, cargoCandidato, exit):
 
     tree = pickle.load(f)
     cargoCandidato = cargoCandidato.lower()
-    list_art = list_candidato_cargo(cargoCandidato, tree, name_archive)
+    list_art = list_candidato(cargoCandidato, tree, name_archive)
 
     print_list(list_art, exit)
 
@@ -123,8 +122,8 @@ if os.path.isfile(handler + 'Data.bin') == False:
             if line[0] == "NM_UE":  # se for a primeira linha, ignora
                 del line
             else:
-                i = 16
-                for element in line[16::1]:
+                i = 19
+                for element in line[19::1]:
                     i += 1
                     if element == "":
                         del line[i-1::]
