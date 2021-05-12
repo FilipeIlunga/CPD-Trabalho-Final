@@ -1,7 +1,7 @@
 import csv
 from csvArq import *
 import numpy as np
-# Para ler arquivo de artigos, aonde se extráira os dados        {.reader()}
+# Para ler o arquivo fonte, aonde se extráira os dados        {.reader()}
 import csv
 # Para manipular strings obtidas no arquivo                      {.sub(), .split()}
 import re
@@ -15,7 +15,7 @@ class Register(object):
     def __init__(self, offset=0, info=[]):
         self.offset = offset
      
-        self.nascimento = info[0]
+        self.unidadeEleitoral = info[0]
         self.CODcargo = int(info[1],10)
         self.cargo = info[2]
         self.numero = info[3]
@@ -38,7 +38,7 @@ class Register(object):
 ########
 
     def __repr__(self):
-        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.nascimento), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
+        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.unidadeEleitoral), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
 
 class NodeTrie(object):
     def __init__(self, value, children_right=None, children_left=None, offsets=[], rest_word=[]):
@@ -112,13 +112,11 @@ class NodeTrie(object):
         else:
             self.AddCodeBin(hash_w_bin, word, offset)
 
-#Definição das funções
 
+def normalize(word):
+    aux_word = word.lower()  # normaliza a palavra, todas letras em minusculo
 
-def normalize(title):
-    aux_title = title.lower()  # normaliza o título, todas letras em minusculo
-
-    word_list = re.sub("[\W]", " ", aux_title).split()
+    word_list = re.sub("[\W]", " ", aux_word).split()
 
     return word_list
 
@@ -137,7 +135,7 @@ def make_index_files(lista_registros, handler):
 
     for registro in lista_registros:  # para cada registro, insere suas palavras na Trie
 
-        nomeCandidato = registro.nome  # pega o título do artigo
+        nomeCandidato = registro.nome  
         candidatoN = normalize(nomeCandidato)
         # para cada palavra, insere-a na Trie ou (se já existe) dá um novo offset
         for word in candidatoN:
@@ -148,12 +146,12 @@ def make_index_files(lista_registros, handler):
         for partido in nomePartido:
             trie_partido.AddNodeWord(partido, registro.offset)
 
-        ocupacaoCandidato = registro.ocupacao  # pega o título do artigo
+        ocupacaoCandidato = registro.ocupacao  
         ocupacaoN = normalize(ocupacaoCandidato)
         for word in ocupacaoN:
             trie_ocupacao.AddNodeWord(word, registro.offset)
 
-        cargoCandidato = registro.cargo  # pega o título do artigo
+        cargoCandidato = registro.cargo 
         cargoN = normalize(cargoCandidato)
         for word in cargoN:
             trie_cargo.AddNodeWord(word, registro.offset)
@@ -202,6 +200,7 @@ def list_candidato(word, tree, name_file):
     else:
         return None
 
+#ordena os candidatos por cargo disputado, presidente, vice, governador ...
 def insertion_sort(lista_registro):
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
@@ -216,22 +215,21 @@ def print_list(lista_registros, numMaxCandidatos):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-        if(len(lista_registros) == 2000000000000000000):
-            sorted(lista_registros, key=lambda Register: Register.nome.lower())
-        else:
-            insertion_sort(lista_registros)
+        insertion_sort(lista_registros)
 
         for registro in lista_registros[:numMaxCandidatos]:
             
+            print("===========================\n")
             print("Nome: %s\n" % (registro.nome))
-            print("Cargo Disputado: %s\n" % (registro.cargo))
-            print("Partido: %s\n" % (registro.nomePartido))
             print("Gênero: %s\n" % (registro.genero))
             print("Idade: %s\n" % (registro.Idade))
+            print("Unidade Eleitoral: %s\n" % (registro.unidadeEleitoral))
+            print("Cargo Disputado: %s\n" % (registro.cargo))
+            print("Partido: %s\n" % (registro.nomePartido))
             print("Instrução: %s\n" % (registro.grauInstrucao))
             print("Ocupação: %s\n" % (registro.ocupacao))
             print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
-            print("===========================\n")
+           
      
            
 
