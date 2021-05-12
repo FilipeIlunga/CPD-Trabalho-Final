@@ -206,7 +206,7 @@ def insertion_sort(lista_registro):
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
         j = i
-        while j > 0 and iterator.CODgenero > lista_registro[j - 1].CODgenero:
+        while j > 0 and iterator.CODcargo < lista_registro[j - 1].CODcargo:
             lista_registro[j] = lista_registro[j-1]
             j -= 1
         lista_registro[j] = iterator
