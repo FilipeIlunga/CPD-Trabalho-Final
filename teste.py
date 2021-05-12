@@ -10,21 +10,21 @@ def switch(menu, handler, saida):
     #implementação de menu com iteração caso usuário faça escolhas erradas.
     while menu != 0:
         if menu == 1:
-            print("Listagem de candidatos por nome.\n")
+            print("Qual o máximo de candidatos deseja listar?.\n")
+            numMaxCandidatos = int(input())
             
-            candidato(handler, input("Nome procurado: "), saida)
+            candidato(handler, input("Nome procurado: "), numMaxCandidatos)
             break
         elif menu == 2:
-            print("Lista Candidatos por profissão.\n")
-            ocupacao(handler, input("Profissão: "), saida)
+            print("Qual o máximo de candidatos deseja listar?:")
+            numMaxCandidatos = int(input())
+            ocupacao(handler, input("Profissão: "), numMaxCandidatos)
            
             break
         elif menu == 3:
-            print("Listagem de candidatos por cargo Disputado.\n")
-            saida.write(
-                "Listagem de candidatos por cargo Disputado.\n")
-
-            cargo(handler, input("Cargo procurado: "), saida)
+            print("Qual o máximo de candidatos deseja listar?:")
+            numMaxCandidatos = int(input())
+            cargo(handler, input("Cargo procurado: "), numMaxCandidatos)
             break
     if menu == 0:
         print("TCHAU!\n")
@@ -33,7 +33,8 @@ def switch(menu, handler, saida):
 
     return 0
 
-def candidato(name_archive, nomeCandidato, exit):
+
+def candidato(name_archive, nomeCandidato, numMaxCandidatos):
     #função lê o arquivo e retorna os dados do autor
     #Função printa dados do autor.
     list_art = []
@@ -44,16 +45,15 @@ def candidato(name_archive, nomeCandidato, exit):
     nomeCandidato = nomeCandidato.lower()
     list_art = list_candidato(nomeCandidato, tree, name_archive)
 
-    print_list(list_art,exit)
-
-    if list_art != None:
-        for i in list_art:
-            r = i.__repr__()
-            exit.write(r + "\n")
+    print_list(list_art, numMaxCandidatos)
+   # if list_art != None:
+   #     for i in list_art:
+   #         r = i.__repr__()
+   #         exit.write(r + "\n")
     f.close()
 
 
-def ocupacao(name_archive, ocupacaoCandidato, exit):
+def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos):
     list_art = []
 
     f = open(name_archive + "data_ocupacao_index.bin", 'rb')
@@ -64,16 +64,16 @@ def ocupacao(name_archive, ocupacaoCandidato, exit):
 
     list_art = list_candidato(ocupacaoCandidato, tree, name_archive)
 
-    print_list(list_art, exit)
+    print_list(list_art, numMaxCandidatos)
 
-    if list_art != None:
-        for i in list_art:
-            r = i.__repr__()
-            exit.write(r + "\n")
+   # if list_art != None:
+   #     for i in list_art:
+   #         r = i.__repr__()
+   #         exit.write(r + "\n")
     f.close()
 
 
-def cargo(name_archive, cargoCandidato, exit):
+def cargo(name_archive, cargoCandidato, numMaxCandidatos):
 
     list_art = []
 
@@ -83,12 +83,12 @@ def cargo(name_archive, cargoCandidato, exit):
     cargoCandidato = cargoCandidato.lower()
     list_art = list_candidato(cargoCandidato, tree, name_archive)
 
-    print_list(list_art, exit)
+    print_list(list_art, numMaxCandidatos)
 
-    if list_art != None:
-        for i in list_art:
-            r = i.__repr__()
-            exit.write(r + "\n")
+    #if list_art != None:
+    #    for i in list_art:
+    #        r = i.__repr__()
+    #        exit.write(r + "\n")
     f.close()
 
 def test():

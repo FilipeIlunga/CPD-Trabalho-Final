@@ -206,12 +206,13 @@ def insertion_sort(lista_registro):
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
         j = i
-        while j > 0 and iterator.CODcargo < lista_registro[j - 1].CODcargo:
+        while j > 0 and (iterator.CODcargo < lista_registro[j - 1].CODcargo):
             lista_registro[j] = lista_registro[j-1]
             j -= 1
         lista_registro[j] = iterator
 
-def print_list(lista_registros,exit):
+
+def print_list(lista_registros, numMaxCandidatos):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
@@ -220,7 +221,7 @@ def print_list(lista_registros,exit):
         else:
             insertion_sort(lista_registros)
 
-        for registro in lista_registros:
+        for registro in lista_registros[:numMaxCandidatos]:
             
             print("Nome: %s\n" % (registro.nome))
             print("Cargo Disputado: %s\n" % (registro.cargo))
@@ -232,13 +233,5 @@ def print_list(lista_registros,exit):
             print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
             print("===========================\n")
      
-           # exit.write("Nome: %s\n" % (registro.nome))
-           # exit.write("Cargo Disputado: %s\n" % (registro.cargo))
-           # exit.write("Partido: %s\n" % (registro.nomePartido))
-           # exit.write("Idade: %s\n" % (registro.genero))
-           # exit.write("Gênero: %s\n" % (registro.Idade))
-           # exit.write("Instrução: %s\n" % (registro.grauInstrucao))
-           # exit.write("Ocupação: %s\n" % (registro.ocupacao))
-           # exit.write("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
-           # exit.write("===========================\n")
+           
 
