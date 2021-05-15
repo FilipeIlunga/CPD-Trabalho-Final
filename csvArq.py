@@ -38,7 +38,7 @@ class Register(object):
 ########
 
     def __repr__(self):
-        return "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (str(self.unidadeEleitoral), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
+        return "%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%s\t%d\t%s\t%s\t%s\t%d\t%s" % (str(self.unidadeEleitoral), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
 
 class NodeTrie(object):
     def __init__(self, value, children_right=None, children_left=None, offsets=[], rest_word=[]):
@@ -147,7 +147,7 @@ def make_index_files(lista_registros, handler):
             trie_partido.AddNodeWord(partido, registro.offset)
 
         ocupacaoCandidato = registro.ocupacao  
-        ocupacaoN = normalize(ocupacaoCandidato)
+        ocupacaoN = normalize(ocupacaoCandidato) 
         for word in ocupacaoN:
             trie_ocupacao.AddNodeWord(word, registro.offset)
 
@@ -201,35 +201,76 @@ def list_candidato(word, tree, name_file):
         return None
 
 #ordena os candidatos por cargo disputado, presidente, vice, governador ...
-def insertion_sort(lista_registro):
+def insertion_sort(lista_registro, ordem):
+   
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
         j = i
-        while j > 0 and (iterator.CODcargo < lista_registro[j - 1].CODcargo):
+        if ordem == 1:
+            ordenacao = iterator.CODcargo < lista_registro[j - 1].CODcargo
+        elif ordem == 2:
+            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
+        elif ordem == 3:
+            ordenacao = iterator.Idade < lista_registro[j - 1].Idade
+        elif ordem == 4:
+            ordenacao = iterator.Idade > lista_registro[j - 1].Idade
+
+        while j > 0 and ordenacao:
             lista_registro[j] = lista_registro[j-1]
             j -= 1
         lista_registro[j] = iterator
 
 
-def print_list(lista_registros, numMaxCandidatos):
+def quicksort(registro,ordem):
+    if len(registro) == 1 or len(registro) == 0:
+        return registro
+    else:
+        if ordem ==1 or ordem == 2:
+           pivot = registro[0].Idade
+        if ordem == 3 or ordem == 4:
+           pivot = registro[0].CODcargo
+        i = 0
+        for j in range(len(registro) - 1):
+            if ordem == 1:
+               ordenacao = registro[j + 1].Idade < pivot
+            if ordem == 2:
+               ordenacao = registro[j + 1].Idade > pivot
+            if ordem == 3:
+               ordenacao = registro[j + 1].CODcargo > pivot
+            if ordem == 4:
+               ordenacao = registro[j+1].CODcargo < pivot
+
+            if registro[j+1].Idade < pivot:
+                registro[j+1], registro[i+1] = registro[i+1], registro[j+1]
+                i += 1
+        registro[0], registro[i] = registro[i], registro[0]
+        first_part = quicksort(registro[:i],ordem)
+        second_part = quicksort(registro[i+1:],ordem)
+        first_part.append(registro[i])
+        return first_part + second_part
+
+def print_list(lista_registros, numMaxCandidatos,ordem):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-        insertion_sort(lista_registros)
-
-        for registro in lista_registros[:numMaxCandidatos]:
-            
-            print("===========================\n")
-            print("Nome: %s\n" % (registro.nome))
-            print("Gênero: %s\n" % (registro.genero))
-            print("Idade: %s\n" % (registro.Idade))
-            print("Unidade Eleitoral: %s\n" % (registro.unidadeEleitoral))
-            print("Cargo Disputado: %s\n" % (registro.cargo))
-            print("Partido: %s\n" % (registro.nomePartido))
-            print("Instrução: %s\n" % (registro.grauInstrucao))
-            print("Ocupação: %s\n" % (registro.ocupacao))
-            print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
-           
-     
+        #insertion_sort(lista_registros,ordem)
+        listaOrdem = quicksort(lista_registros,ordem)
+       
+        for registro in listaOrdem[:numMaxCandidatos]:
+           print("%s,", registro.Idade)
+        print('-----CARGO-----')
+        for registro in listaOrdem[:numMaxCandidatos]:
+           print("%s,", registro.CODcargo)
+           #  print("===========================\n")
+           # print("Nome: %s\n" % (registro.nome))
+           # print("Gênero: %s\n" % (registro.genero))
+           # print("Idade: %s\n" % (registro.Idade))
+           # print("Unidade Eleitoral: %s\n" % (registro.unidadeEleitoral))
+           # print("Cargo Disputado: %s\n" % (registro.cargo))
+           # print("Partido: %s\n" % (registro.nomePartido))
+           # print("Instrução: %s\n" % (registro.grauInstrucao))
+           # print("Ocupação: %s\n" % (registro.ocupacao))
+           # print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
+                
            
 

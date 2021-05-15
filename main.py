@@ -20,11 +20,20 @@ def switch(menu, handler):
     if menu == 0:
         print("###### PROGRAMA FINALIZADO! ######\n")
 
-
     return 0
 
 
 def candidato(name_archive, nomeCandidato, numMaxCandidatos):
+    print("\n\nORDENACAO:")
+    print("[1] Ordenar por cargo, maior para o menor.\n")
+    print("[2] Ordenar por cargo, menor para o maior.\n")
+    print("[3] Ordenar por idade, maior para o menor.\n")
+    print("[4] Ordenar por idade, menor para o maior.\n")
+    print("[3] Ordenar por grau de instrucao, maior para o menor.\n")
+    print("[4] Ordenar por grau de instrucao, menor para o maior.\n")
+    
+    menu = int(input())
+
     #função lê o arquivo e retorna os dados do candidato
     list_cand = []
 
@@ -34,7 +43,7 @@ def candidato(name_archive, nomeCandidato, numMaxCandidatos):
     nomeCandidato = nomeCandidato.lower()
     list_cand = list_candidato(nomeCandidato, tree, name_archive)
 
-    print_list(list_cand, numMaxCandidatos)
+    print_list(list_cand, numMaxCandidatos,menu)
 
     f.close()
 
