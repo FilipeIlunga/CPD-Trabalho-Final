@@ -19,18 +19,22 @@ def switch(menu, handler):
             break
     if menu == 0:
         print("###### PROGRAMA FINALIZADO! ######\n")
-
+           
     return 0
+
 
 
 def candidato(name_archive, nomeCandidato, numMaxCandidatos):
     print("\n\nORDENACAO:")
-    print("[1] Ordenar por cargo, maior para o menor.\n")
-    print("[2] Ordenar por cargo, menor para o maior.\n")
-    print("[3] Ordenar por idade, maior para o menor.\n")
-    print("[4] Ordenar por idade, menor para o maior.\n")
-    print("[3] Ordenar por grau de instrucao, maior para o menor.\n")
-    print("[4] Ordenar por grau de instrucao, menor para o maior.\n")
+    print("#### Ordenar por Idade ####.\n")
+    print("\t\t[1]  maior para o menor.\n")
+    print("\t\t[2]  Menor para o Maior.\n")
+    print("#### Ordenar por Cargo ####.\n")
+    print("\t\t[3]  maior para o menor.\n")
+    print("\t\t[4]  Menor para o Maior.\n")
+    print("#### Ordenar por grau de instrucao ####.\n")
+    print("\t\t[5]  maior para o menor.\n")
+    print("\t\t[6]  Menor para o Maior.\n")
     
     menu = int(input())
 
@@ -49,6 +53,18 @@ def candidato(name_archive, nomeCandidato, numMaxCandidatos):
 
 
 def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos):
+    print("\n\nORDENACAO:")
+    print("#### Ordenar por Idade ####.\n")
+    print("\t\t[1]  maior para o menor.\n")
+    print("\t\t[2]  Menor para o Maior.\n")
+    print("#### Ordenar por Cargo ####.\n")
+    print("\t\t[3]  maior para o menor.\n")
+    print("\t\t[4]  Menor para o Maior.\n")
+    print("#### Ordenar por grau de instrucao ####.\n")
+    print("\t\t[5]  maior para o menor.\n")
+    print("\t\t[6]  Menor para o Maior.\n")
+    
+    menu = int(input())
     #função lê o arquivo e retorna os dados do candidato da ocupação informada
     list_cand = []
 
@@ -60,12 +76,24 @@ def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos):
 
     list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
 
-    print_list(list_cand, numMaxCandidatos)
+    print_list(list_cand, numMaxCandidatos,menu)
 
     f.close()
 
 
 def cargo(name_archive, cargoCandidato, numMaxCandidatos):
+    print("\n\nORDENACAO:")
+    print("#### Ordenar por Idade ####.\n")
+    print("\t\t[1]  maior para o menor.\n")
+    print("\t\t[2]  Menor para o Maior.\n")
+    print("#### Ordenar por Cargo ####.\n")
+    print("\t\t[3]  maior para o menor.\n")
+    print("\t\t[4]  Menor para o Maior.\n")
+    print("#### Ordenar por grau de instrucao ####.\n")
+    print("\t\t[5]  maior para o menor.\n")
+    print("\t\t[6]  Menor para o Maior.\n")
+    
+    menu = int(input())
     #função lê o arquivo e retorna os dados do candidato que disputou o cargo informado
 
     list_cand = []
@@ -76,7 +104,7 @@ def cargo(name_archive, cargoCandidato, numMaxCandidatos):
     cargoCandidato = cargoCandidato.lower()
     list_cand = list_candidato(cargoCandidato, tree, name_archive)
 
-    print_list(list_cand, numMaxCandidatos)
+    print_list(list_cand, numMaxCandidatos,menu)
 
     f.close()
 

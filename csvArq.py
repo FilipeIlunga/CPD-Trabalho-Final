@@ -25,8 +25,11 @@ class Register(object):
         self.siglaPartido = info[7]
         self.nomePartido = info[8]
         self.municipioNascimento = info[9]
-        self.dataNascimento= info[10]
-        self.Idade = info[11]
+        self.dataNascimento = info[10]
+        if info[11] == '':
+            self.Idade = info[11]
+        else:
+            self.Idade = int(info[11])
         self.CODgenero = int(info[12],10)
         self.genero = info[13]
         self.CODgrauInstrucao = int(info[14],10)
@@ -232,15 +235,19 @@ def quicksort(registro,ordem):
         i = 0
         for j in range(len(registro) - 1):
             if ordem == 1:
-               ordenacao = registro[j + 1].Idade < pivot
-            if ordem == 2:
                ordenacao = registro[j + 1].Idade > pivot
-            if ordem == 3:
+            elif ordem == 2:
+               ordenacao = registro[j + 1].Idade < pivot
+            elif ordem == 3:
                ordenacao = registro[j + 1].CODcargo > pivot
-            if ordem == 4:
-               ordenacao = registro[j+1].CODcargo < pivot
+            elif ordem == 4:
+               ordenacao = registro[j + 1].CODcargo < pivot
+            else:
+                print("COMANDO INVALIDO\n")
+                print("ORDEM POR CARGO SERÁ SEGUIDA\n\n")
+                ordenacao = registro[j + 1].CODcargo > pivot
 
-            if registro[j+1].Idade < pivot:
+            if ordenacao:
                 registro[j+1], registro[i+1] = registro[i+1], registro[j+1]
                 i += 1
         registro[0], registro[i] = registro[i], registro[0]
@@ -257,20 +264,16 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
         listaOrdem = quicksort(lista_registros,ordem)
        
         for registro in listaOrdem[:numMaxCandidatos]:
-           print("%s,", registro.Idade)
-        print('-----CARGO-----')
-        for registro in listaOrdem[:numMaxCandidatos]:
-           print("%s,", registro.CODcargo)
-           #  print("===========================\n")
-           # print("Nome: %s\n" % (registro.nome))
-           # print("Gênero: %s\n" % (registro.genero))
-           # print("Idade: %s\n" % (registro.Idade))
-           # print("Unidade Eleitoral: %s\n" % (registro.unidadeEleitoral))
-           # print("Cargo Disputado: %s\n" % (registro.cargo))
-           # print("Partido: %s\n" % (registro.nomePartido))
-           # print("Instrução: %s\n" % (registro.grauInstrucao))
-           # print("Ocupação: %s\n" % (registro.ocupacao))
-           # print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
+           print("===========================\n")
+           print("Nome: %s\n" % (registro.nome))
+           print("Gênero: %s\n" % (registro.genero))
+           print("Idade: %s\n" % (registro.Idade))
+           print("Unidade Eleitoral: %s\n" % (registro.unidadeEleitoral))
+           print("Cargo Disputado: %s\n" % (registro.cargo))
+           print("Partido: %s\n" % (registro.nomePartido))
+           print("Instrução: %s\n" % (registro.grauInstrucao))
+           print("Ocupação: %s\n" % (registro.ocupacao))
+           print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
                 
            
 
