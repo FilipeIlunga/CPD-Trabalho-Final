@@ -27,14 +27,14 @@ def switch(menu, handler):
 def candidato(name_archive, nomeCandidato, numMaxCandidatos):
     print("\n\nORDENACAO:")
     print("#### Ordenar por Idade ####.\n")
-    print("\t\t[1]  maior para o menor.\n")
-    print("\t\t[2]  Menor para o Maior.\n")
+    print("\t[1]  maior para o menor.\n")
+    print("\t[2]  Menor para o Maior.\n")
     print("#### Ordenar por Cargo ####.\n")
-    print("\t\t[3]  maior para o menor.\n")
-    print("\t\t[4]  Menor para o Maior.\n")
+    print("\t[3]  maior para o menor.\n")
+    print("\t[4]  Menor para o Maior.\n")
     print("#### Ordenar por grau de instrucao ####.\n")
-    print("\t\t[5]  maior para o menor.\n")
-    print("\t\t[6]  Menor para o Maior.\n")
+    print("\t[5]  maior para o menor.\n")
+    print("\t[6]  Menor para o Maior.\n")
     
     menu = int(input())
 
@@ -55,14 +55,14 @@ def candidato(name_archive, nomeCandidato, numMaxCandidatos):
 def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos):
     print("\n\nORDENACAO:")
     print("#### Ordenar por Idade ####.\n")
-    print("\t\t[1]  maior para o menor.\n")
-    print("\t\t[2]  Menor para o Maior.\n")
+    print("\t[1]  maior para o menor.\n")
+    print("\t[2]  Menor para o Maior.\n")
     print("#### Ordenar por Cargo ####.\n")
-    print("\t\t[3]  maior para o menor.\n")
-    print("\t\t[4]  Menor para o Maior.\n")
+    print("\t[3]  maior para o menor.\n")
+    print("\t[4]  Menor para o Maior.\n")
     print("#### Ordenar por grau de instrucao ####.\n")
-    print("\t\t[5]  maior para o menor.\n")
-    print("\t\t[6]  Menor para o Maior.\n")
+    print("\t[5]  maior para o menor.\n")
+    print("\t[6]  Menor para o Maior.\n")
     
     menu = int(input())
     #função lê o arquivo e retorna os dados do candidato da ocupação informada
@@ -84,14 +84,11 @@ def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos):
 def cargo(name_archive, cargoCandidato, numMaxCandidatos):
     print("\n\nORDENACAO:")
     print("#### Ordenar por Idade ####.\n")
-    print("\t\t[1]  maior para o menor.\n")
-    print("\t\t[2]  Menor para o Maior.\n")
-    print("#### Ordenar por Cargo ####.\n")
-    print("\t\t[3]  maior para o menor.\n")
-    print("\t\t[4]  Menor para o Maior.\n")
+    print("\t[1]  maior para o menor.\n")
+    print("\t[2]  Menor para o Maior.\n")
     print("#### Ordenar por grau de instrucao ####.\n")
-    print("\t\t[5]  maior para o menor.\n")
-    print("\t\t[6]  Menor para o Maior.\n")
+    print("\t[5]  maior para o menor.\n")
+    print("\t[6]  Menor para o Maior.\n")
     
     menu = int(input())
     #função lê o arquivo e retorna os dados do candidato que disputou o cargo informado

@@ -27,7 +27,7 @@ class Register(object):
         self.municipioNascimento = info[9]
         self.dataNascimento = info[10]
         if info[11] == '':
-            self.Idade = info[11]
+            self.Idade = -1
         else:
             self.Idade = int(info[11])
         self.CODgenero = int(info[12],10)
@@ -230,7 +230,11 @@ def quicksort(registro,ordem):
     else:
         if ordem ==1 or ordem == 2:
            pivot = registro[0].Idade
-        if ordem == 3 or ordem == 4:
+        elif ordem == 3 or ordem == 4:
+           pivot = registro[0].CODcargo
+        elif ordem == 5 or ordem == 6:
+           pivot = registro[0].CODgrauInstrucao
+        else:
            pivot = registro[0].CODcargo
         i = 0
         for j in range(len(registro) - 1):
@@ -239,12 +243,15 @@ def quicksort(registro,ordem):
             elif ordem == 2:
                ordenacao = registro[j + 1].Idade < pivot
             elif ordem == 3:
-               ordenacao = registro[j + 1].CODcargo > pivot
-            elif ordem == 4:
                ordenacao = registro[j + 1].CODcargo < pivot
+            elif ordem == 4:
+               ordenacao = registro[j + 1].CODcargo > pivot
+            elif ordem == 5:
+               ordenacao = registro[j + 1].CODgrauInstrucao > pivot
+            elif ordem == 6:
+               ordenacao = registro[j + 1].CODgrauInstrucao < pivot
             else:
-                print("COMANDO INVALIDO\n")
-                print("ORDEM POR CARGO SERÁ SEGUIDA\n\n")
+                print("COMANDO INVALIDO, ORDEM POR CARGO SERÁ SEGUIDA\n\n")
                 ordenacao = registro[j + 1].CODcargo > pivot
 
             if ordenacao:
@@ -264,6 +271,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
         listaOrdem = quicksort(lista_registros,ordem)
        
         for registro in listaOrdem[:numMaxCandidatos]:
+         
            print("===========================\n")
            print("Nome: %s\n" % (registro.nome))
            print("Gênero: %s\n" % (registro.genero))
@@ -273,7 +281,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
            print("Partido: %s\n" % (registro.nomePartido))
            print("Instrução: %s\n" % (registro.grauInstrucao))
            print("Ocupação: %s\n" % (registro.ocupacao))
-           print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao))
+           print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao)) 
                 
            
 
