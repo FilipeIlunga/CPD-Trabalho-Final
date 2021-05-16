@@ -264,16 +264,17 @@ def quicksort(registro,ordem):
         return first_part + second_part
 
 def print_list(lista_registros, numMaxCandidatos,ordem):
-    arquivo = open("saida.txt","w", encoding="utf-8")
+    arquivo = open("saida.txt", "w", encoding="utf-8")
+    arquivo.truncate(0)
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
         #insertion_sort(lista_registros,ordem)
         listaOrdem = quicksort(lista_registros,ordem)
-       
+        i=0
         for registro in listaOrdem[:numMaxCandidatos]:
-         
-           print("===========================\n")
+           i=i+1
+           print("=============="+str(i)+"============\n")
            print("Nome: %s\n" % (registro.nome))
            print("Gênero: %s\n" % (registro.genero))
            print("Idade: %s\n" % (registro.Idade))
@@ -284,7 +285,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
            print("Ocupação: %s\n" % (registro.ocupacao))
            print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao)) 
 
-           arquivo.write("===========================\n")
+           arquivo.write("=============="+str(i)+"============\n")
            arquivo.write("Nome: " + (registro.nome)+"\n")
            arquivo.write("Gênero: " + (registro.genero)+"\n")
            arquivo.write("Idade: " + (str(registro.Idade))+"\n")
