@@ -1,0 +1,144 @@
+===========================
+Nome: ANESIA MARIA AVILA POPIK
+Gênero: FEMININO
+Idade: 66
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO RENOVADOR TRABALHISTA BRASILEIROInstrução: ENSINO M�DIO COMPLETO
+Ocupação: COMERCIANTE
+Situação após eleição: N�O ELEITO
+===========================
+Nome: FRANCISCO HAMILTON D AVILA LUCENA
+Gênero: MASCULINO
+Idade: 59
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO DA SOCIAL DEMOCRACIA BRASILEIRAInstrução: ENSINO M�DIO INCOMPLETO
+Ocupação: EMPRES�RIO
+Situação após eleição: SUPLENTE
+===========================
+Nome: SARA TERESINHA AVILA FERNANDES
+Gênero: FEMININO
+Idade: 49
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO REPUBLICANO DA ORDEM SOCIALInstrução: SUPERIOR INCOMPLETO
+Ocupação: OUTROS
+Situação após eleição: N�O ELEITO
+===========================
+Nome: CLARICE DE FREITAS SILVA AVILA 
+Gênero: FEMININO
+Idade: 47
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO DOS TRABALHADORESInstrução: SUPERIOR COMPLETO
+Ocupação: PROFESSOR DE ENSINO M�DIO
+Situação após eleição: SUPLENTE
+===========================
+Nome: LUIZ CARLOS FORT AVILA DA SILVA
+Gênero: MASCULINO
+Idade: 46
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO DA REP�BLICAInstrução: SUPERIOR INCOMPLETO
+Ocupação: EMPRES�RIO
+Situação após eleição: SUPLENTE
+===========================
+Nome: LUIS GUSTAVO D AVILA RIANI
+Gênero: MASCULINO
+Idade: 46
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO VERDEInstrução: SUPERIOR COMPLETO
+Ocupação: ADVOGADO
+Situação após eleição: SUPLENTE
+===========================
+Nome: AMANDIO CESAR DOS SANTOS AVILA
+Gênero: MASCULINO
+Idade: 43
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO VERDEInstrução: ENSINO M�DIO COMPLETO
+Ocupação: OUTROS
+Situação após eleição: SUPLENTE
+===========================
+Nome: DIONE ELISA DE AVILA DIAS
+Gênero: FEMININO
+Idade: 42
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO SOCIALISTA BRASILEIROInstrução: SUPERIOR COMPLETO
+Ocupação: OUTROS
+Situação após eleição: SUPLENTE
+===========================
+Nome: FREDERICO BRAUN D AVILA
+Gênero: MASCULINO
+Idade: 41
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO SOCIAL LIBERALInstrução: SUPERIOR COMPLETO
+Ocupação: PRODUTOR AGROPECU�RIO
+Situação após eleição: ELEITO POR QP
+===========================
+Nome: CARLOS MANOEL AVILA SANTOS
+Gênero: MASCULINO
+Idade: 39
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: SOLIDARIEDADEInstrução: SUPERIOR COMPLETO
+Ocupação: FISIOTERAPEUTA E TERAPEUTA OCUPACIONAL
+Situação após eleição: SUPLENTE
+===========================
+Nome: PRISCILA D AVILA LAURITO
+Gênero: FEMININO
+Idade: 37
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO COMUNISTA DO BRASILInstrução: ENSINO M�DIO COMPLETO
+Ocupação: OUTROS
+Situação após eleição: N�O ELEITO
+===========================
+Nome: MANUELA PINTO VIEIRA D AVILA
+Gênero: FEMININO
+Idade: 37
+Cargo Disputado: VICE-PRESIDENTE
+Partido: PARTIDO COMUNISTA DO BRASILInstrução: SUPERIOR COMPLETO
+Ocupação: DEPUTADO
+Situação após eleição: N�O ELEITO
+===========================
+Nome: LUIZ ALBERTO AVILA SILVA JUNIOR
+Gênero: MASCULINO
+Idade: 37
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO DOS TRABALHADORESInstrução: SUPERIOR COMPLETO
+Ocupação: ADVOGADO
+Situação após eleição: SUPLENTE
+===========================
+Nome: WALDEMAR JOS� DE AVILA NETO
+Gênero: MASCULINO
+Idade: 37
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO HUMANISTA DA SOLIDARIEDADEInstrução: SUPERIOR COMPLETO
+Ocupação: EMPRES�RIO
+Situação após eleição: SUPLENTE
+===========================
+Nome: MANUELA PINTO VIEIRA D AVILA
+Gênero: FEMININO
+Idade: 37
+Cargo Disputado: VICE-PRESIDENTE
+Partido: PARTIDO COMUNISTA DO BRASILInstrução: SUPERIOR COMPLETO
+Ocupação: DEPUTADO
+Situação após eleição: 2� TURNO
+===========================
+Nome: WELLINGTON AVILA
+Gênero: MASCULINO
+Idade: 36
+Cargo Disputado: DEPUTADO FEDERAL
+Partido: PARTIDO SOCIAL DEMOCR�TICOInstrução: SUPERIOR COMPLETO
+Ocupação: PROFESSOR DE ENSINO SUPERIOR
+Situação após eleição: SUPLENTE
+===========================
+Nome: PAULO ALCEU AVILA RAMOS
+Gênero: MASCULINO
+Idade: 35
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: PARTIDO DA REP�BLICAInstrução: SUPERIOR COMPLETO
+Ocupação: ODONT�LOGO
+Situação após eleição: ELEITO POR QP
+===========================
+Nome: JULIANA D AVILA MARTIN
+Gênero: FEMININO
+Idade: 28
+Cargo Disputado: DEPUTADO ESTADUAL
+Partido: MOVIMENTO DEMOCR�TICO BRASILEIROInstrução: SUPERIOR COMPLETO
+Ocupação: ADVOGADO
+Situação após eleição: SUPLENTE
