@@ -12,6 +12,7 @@ import pickle
 #--coding: ANSI - -
 from random import seed
 from random import randint
+import time
 
 class Register(object):
     def __init__(self, offset=0, info=[]):
@@ -273,6 +274,7 @@ def quicksort(registro,ordem):
         first_part.append(registro[i])
         return first_part + second_part
 
+
 def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
     arquivo = open("saida.txt", "w", encoding="utf-8")
     arquivo.truncate(0)
@@ -303,10 +305,11 @@ def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-       # insertion_sort(lista_registros,ordem)
-        #listaOrdem = quicksort(lista_registros,ordem)
+   
+        #insertion_sort(lista_registros,ordem)
+        listaOrdem = quicksort(lista_registros,ordem)
         i=0
-        for registro in lista_registros[:numMaxCandidatos]:
+        for registro in listaOrdem[:numMaxCandidatos]:
            i=i+1
            print("=============="+str(i)+"============\n")
            print("Nome: %s\n" % (registro.nome))
@@ -331,6 +334,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
            arquivo.write("Situação após eleição: " + (registro.situacaoPosEleicao)+"\n\n")
 
         arquivo.close()
+
                 
            
 

@@ -1,6 +1,7 @@
 
 import os
 from csvArq import *
+import time
 #--coding: ANSI - -
 
 # Funções
@@ -10,7 +11,11 @@ def switch(menu, handler):
     #implementação de menu com iteração caso usuário faça escolhas erradas.
     while menu != 0:
         if menu == 1:
-            candidato(handler, input("Nome procurado: "), int(input("Qual o máximo de candidatos deseja listar?: ")),menu)
+            
+            inicio = time.time()
+            candidato(handler, input("Nome procurado: "), int(input("Qual o máximo de candidatos deseja listar?: ")), menu)
+            fim = time.time()
+            print(fim - inicio)
             break
         elif menu == 2:
             ocupacao(handler, input("Profissão: "), int(input("Qual o máximo de candidatos deseja listar?: ")),menu)
@@ -52,29 +57,36 @@ def printMenu(menu):
 
 def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
     
-    menu=1
-    while menu!= 0:
+    list_cand = []
+
+    f = open(name_archive + "data_candidato_index.bin", 'rb')
+    tree = pickle.load(f)
+    nomeCandidato = nomeCandidato.lower()
+
+    list_cand = list_candidato(nomeCandidato, tree, name_archive)
+    f.close()
+    menu = 1
+    while menu != 0:
         printMenu(menuPrint)
 
         menu = int(input())
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        list_cand = []
-
-        f = open(name_archive + "data_candidato_index.bin", 'rb')
-
-        tree = pickle.load(f)
-        nomeCandidato = nomeCandidato.lower()
-
-        list_cand = list_candidato(nomeCandidato, tree, name_archive)
-        print_list(list_cand, numMaxCandidatos,menu,menuPrint,nomeCandidato)
-        
-        f.close()
+        print_list(list_cand, numMaxCandidatos, menu,
+                   menuPrint, nomeCandidato)
 
 
 def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos,menuPrint):
 
+    list_cand = []
+
+    f = open(name_archive + "data_ocupacao_index.bin", 'rb')
+    tree = pickle.load(f)
+    ocupacaoCandidato = ocupacaoCandidato.lower()
+
+    list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
+    f.close()
     menu = 1
     while menu != 0:
         printMenu(menuPrint)
@@ -83,22 +95,21 @@ def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos,menuPrint):
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        list_cand = []
-
-        f = open(name_archive + "data_ocupacao_index.bin", 'rb')
-
-        tree = pickle.load(f)
-        ocupacaoCandidato = ocupacaoCandidato.lower()
-
-        list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
         print_list(list_cand, numMaxCandidatos, menu,
                    menuPrint, ocupacaoCandidato)
 
-        f.close()
 
 
 def cargo(name_archive, cargoCandidato, numMaxCandidatos,menuPrint):
 
+    list_cand = []
+
+    f = open(name_archive + "data_cargo_index.bin", 'rb')
+    tree = pickle.load(f)
+    cargoCandidato = cargoCandidato.lower()
+
+    list_cand = list_candidato(cargoCandidato, tree, name_archive)
+    f.close()
     menu = 1
     while menu != 0:
         printMenu(menuPrint)
@@ -107,17 +118,8 @@ def cargo(name_archive, cargoCandidato, numMaxCandidatos,menuPrint):
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        list_cand = []
-
-        f = open(name_archive + "data_cargo_index.bin", 'rb')
-
-        tree = pickle.load(f)
-        cargoCandidato = cargoCandidato.lower()
-
-        list_cand = list_candidato(cargoCandidato, tree, name_archive)
-        print_list(list_cand, numMaxCandidatos, menu,menuPrint, cargoCandidato)
-
-        f.close()
+        print_list(list_cand, numMaxCandidatos, menu,
+                   menuPrint, cargoCandidato)
 
 def abrirArq():
     try:
