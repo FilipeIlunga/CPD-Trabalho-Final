@@ -55,16 +55,7 @@ def printMenu(menu):
         print("\n[0] FAZER OUTRA BUSCA")
 
 
-def candidato(name_archive, nomeCandidato,menuPrint):
-    
-    list_cand = []
-
-    f = open(name_archive + "data_candidato_index.bin", 'rb')
-    tree = pickle.load(f)
-    nomeCandidato = nomeCandidato.lower()
-
-    list_cand = list_candidato(nomeCandidato, tree, name_archive)
-    f.close()
+def menuOrdem(menuPrint, list_cand, nomeCandidato):
     menu = 1
     while menu != 0:
         printMenu(menuPrint)
@@ -75,6 +66,18 @@ def candidato(name_archive, nomeCandidato,menuPrint):
         #função lê o arquivo e retorna os dados do candidato
         print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
                    menuPrint, nomeCandidato)
+
+def candidato(name_archive, nomeCandidato,menuPrint):
+    
+    list_cand = []
+
+    f = open(name_archive + "data_candidato_index.bin", 'rb')
+    tree = pickle.load(f)
+    nomeCandidato = nomeCandidato.lower()
+
+    list_cand = list_candidato(nomeCandidato, tree, name_archive)
+    f.close()
+    menuOrdem(menuPrint, list_cand, nomeCandidato)
 
 
 def ocupacao(name_archive, ocupacaoCandidato,menuPrint):
@@ -87,16 +90,7 @@ def ocupacao(name_archive, ocupacaoCandidato,menuPrint):
 
     list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
     f.close()
-    menu = 1
-    while menu != 0:
-        printMenu(menuPrint)
-
-        menu = int(input())
-        if menu == 0:
-            return
-        #função lê o arquivo e retorna os dados do candidato
-        print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
-                   menuPrint, ocupacaoCandidato)
+    menuOrdem(menuPrint, list_cand, ocupacaoCandidato)
 
 
 
@@ -110,16 +104,7 @@ def cargo(name_archive, cargoCandidato,menuPrint):
 
     list_cand = list_candidato(cargoCandidato, tree, name_archive)
     f.close()
-    menu = 1
-    while menu != 0:
-        printMenu(menuPrint)
-
-        menu = int(input())
-        if menu == 0:
-            return
-        #função lê o arquivo e retorna os dados do candidato
-        print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
-                   menuPrint, cargoCandidato)
+    menuOrdem(menuPrint, list_cand, cargoCandidato)
 
 def abrirArq():
     try:
