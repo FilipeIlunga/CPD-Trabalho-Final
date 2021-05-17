@@ -300,7 +300,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
         tipoOrdem1 = 'GRAU DE INSTRUÇÃO'
 
     arquivo.write("BUSCA POR " + tipoBusca + ", EM ORDEM " + tipoOrdem + " DE " + tipoOrdem1 + "\n")
-    arquivo.write(tipoBusca + " PROCURADO: " + nomeBusca.upper() + "\n\n")
+    arquivo.write("BUSCA POR: " + nomeBusca.upper() + "\n")
     arquivo.write("CANDIDATOS ENCONTRADOS: " + str(len(lista_registros)) + "\n\n")
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")

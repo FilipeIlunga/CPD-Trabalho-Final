@@ -13,15 +13,15 @@ def switch(menu, handler):
         if menu == 1:
             
             inicio = time.time()
-            candidato(handler, input("Nome procurado: "), int(input("Qual o máximo de candidatos deseja listar?: ")), menu)
+            candidato(handler, input("Nome procurado: "), menu)
             fim = time.time()
             print(fim - inicio)
             break
         elif menu == 2:
-            ocupacao(handler, input("Profissão: "), int(input("Qual o máximo de candidatos deseja listar?: ")),menu)
+            ocupacao(handler, input("Profissão: "),menu)
             break
         elif menu == 3:
-            cargo(handler, input("Cargo procurado: "), int(input("Qual o máximo de candidatos deseja listar?: ")),menu)
+            cargo(handler, input("Cargo procurado: "),menu)
             break
         else:
             print('[%s] É COMANDO INVALIDO, TENTE NOVAMENTE\n' %  menu)
@@ -55,7 +55,7 @@ def printMenu(menu):
         print("\n[0] FAZER OUTRA BUSCA")
 
 
-def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
+def candidato(name_archive, nomeCandidato,menuPrint):
     
     list_cand = []
 
@@ -73,11 +73,11 @@ def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        print_list(list_cand, numMaxCandidatos, menu,
+        print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
                    menuPrint, nomeCandidato)
 
 
-def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos,menuPrint):
+def ocupacao(name_archive, ocupacaoCandidato,menuPrint):
 
     list_cand = []
 
@@ -95,12 +95,12 @@ def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos,menuPrint):
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        print_list(list_cand, numMaxCandidatos, menu,
+        print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
                    menuPrint, ocupacaoCandidato)
 
 
 
-def cargo(name_archive, cargoCandidato, numMaxCandidatos,menuPrint):
+def cargo(name_archive, cargoCandidato,menuPrint):
 
     list_cand = []
 
@@ -118,7 +118,7 @@ def cargo(name_archive, cargoCandidato, numMaxCandidatos,menuPrint):
         if menu == 0:
             return
         #função lê o arquivo e retorna os dados do candidato
-        print_list(list_cand, numMaxCandidatos, menu,
+        print_list(list_cand, int(input("Qual o máximo de candidatos deseja listar?: ")), menu,
                    menuPrint, cargoCandidato)
 
 def abrirArq():
