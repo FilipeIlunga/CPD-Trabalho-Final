@@ -9,7 +9,9 @@ import re
 import hashlib
 # Para utilizar protocolos binários para serializar objetos      {.dump(), .load()}
 import pickle
-
+#--coding: ANSI - -
+from random import seed
+from random import randint
 
 class Register(object):
     def __init__(self, offset=0, info=[]):
@@ -209,15 +211,22 @@ def insertion_sort(lista_registro, ordem):
     for i in range(len(lista_registro)):
         iterator = lista_registro[i]
         j = i
-        if ordem == 1:
-            ordenacao = iterator.CODcargo < lista_registro[j - 1].CODcargo
-        elif ordem == 2:
-            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
-        elif ordem == 3:
-            ordenacao = iterator.Idade < lista_registro[j - 1].Idade
-        elif ordem == 4:
-            ordenacao = iterator.Idade > lista_registro[j - 1].Idade
 
+        if ordem == 1:
+            ordenacao = iterator.Idade > lista_registro[j - 1].Idade
+        elif ordem == 2:
+            ordenacao = iterator.Idade < lista_registro[j - 1].Idade
+        elif ordem == 3:
+            ordenacao = iterator.CODcargo < lista_registro[j - 1].CODcargo
+        elif ordem == 4:
+            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
+        elif ordem == 5:
+            ordenacao = iterator.CODgrauInstrucao > lista_registro[j - 1].CODgrauInstrucao
+        elif ordem == 6:
+            ordenacao = iterator.CODgrauInstrucao < lista_registro[j - 1].CODgrauInstrucao
+        else:
+            print("COMANDO INVALIDO, ORDEM POR CARGO SERÁ SEGUIDA\n\n")
+            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
         while j > 0 and ordenacao:
             lista_registro[j] = lista_registro[j-1]
             j -= 1
@@ -269,10 +278,10 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-        #insertion_sort(lista_registros,ordem)
+        insertion_sort(lista_registros,ordem)
         listaOrdem = quicksort(lista_registros,ordem)
         i=0
-        for registro in listaOrdem[:numMaxCandidatos]:
+        for registro in lista_registros[:numMaxCandidatos]:
            i=i+1
            print("=============="+str(i)+"============\n")
            print("Nome: %s\n" % (registro.nome))
