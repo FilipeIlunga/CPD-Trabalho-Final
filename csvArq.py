@@ -298,14 +298,15 @@ def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
         tipoOrdem1 = 'GRAU DE INSTRUÇÃO'
 
     arquivo.write("BUSCA POR " + tipoBusca + ", EM ORDEM " + tipoOrdem + " DE " + tipoOrdem1 + "\n")
-    arquivo.write( tipoBusca + " PROCURADO: " +  nomeBusca +"\n\n")
+    arquivo.write(tipoBusca + " PROCURADO: " + nomeBusca.upper() + "\n\n")
+    arquivo.write("CANDIDATOS ENCONTRADOS: " + str(len(lista_registros)) + "\n\n")
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
        # insertion_sort(lista_registros,ordem)
-        listaOrdem = quicksort(lista_registros,ordem)
+        #listaOrdem = quicksort(lista_registros,ordem)
         i=0
-        for registro in listaOrdem[:numMaxCandidatos]:
+        for registro in lista_registros[:numMaxCandidatos]:
            i=i+1
            print("=============="+str(i)+"============\n")
            print("Nome: %s\n" % (registro.nome))
@@ -318,7 +319,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
            print("Ocupação: %s\n" % (registro.ocupacao))
            print("Situação após eleição: %s\n" % (registro.situacaoPosEleicao)) 
 
-           arquivo.write("=============="+str(i)+"============\n")
+           arquivo.write("["+str(i)+"]\n")
            arquivo.write("Nome: " + (registro.nome)+"\n")
            arquivo.write("Gênero: " + (registro.genero)+"\n")
            arquivo.write("Idade: " + (str(registro.Idade))+"\n")

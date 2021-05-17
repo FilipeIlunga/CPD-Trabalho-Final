@@ -47,7 +47,7 @@ def printMenu(menu):
         print("GRAU DE INSTRUÇÃO.\n")
         print("\t[5]  Decrescente\n")
         print("\t[6]  Crescente.\n")
-        print("\n[0] BUSCAR OUTRO CANDIDATO")
+        print("\n[0] FAZER OUTRA BUSCA")
 
 
 def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
