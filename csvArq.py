@@ -233,6 +233,7 @@ def insertion_sort(lista_registro, ordem):
         lista_registro[j] = iterator
 
 
+
 def quicksort(registro,ordem):
     if len(registro) == 1 or len(registro) == 0:
         return registro
@@ -272,16 +273,39 @@ def quicksort(registro,ordem):
         first_part.append(registro[i])
         return first_part + second_part
 
-def print_list(lista_registros, numMaxCandidatos,ordem):
+def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
     arquivo = open("saida.txt", "w", encoding="utf-8")
     arquivo.truncate(0)
+    tipoOrdem = ''
+    tipoBusca = ''
+    tipoOrdem1 = ''
+    if busca == 1:
+       tipoBusca = 'NOME'
+    elif busca == 2:
+        tipoBusca = 'OCUPAÇÃO'
+    elif busca == 3:
+        tipoBusca = 'CARGO'
+    
+    if ordem == 1 or ordem == 3 or ordem == 5:
+        tipoOrdem = 'DECRESCENTE'
+    else:
+        tipoOrdem = 'CRESCENTE'
+    if ordem == 1 or ordem == 2:
+        tipoOrdem1 = 'IDADE'
+    elif ordem == 3 or ordem == 4:
+        tipoOrdem1 = 'CARGO'
+    else:
+        tipoOrdem1 = 'GRAU DE INSTRUÇÃO'
+
+    arquivo.write("BUSCA POR " + tipoBusca + ", EM ORDEM " + tipoOrdem + " DE " + tipoOrdem1 + "\n")
+    arquivo.write( tipoBusca + " PROCURADO: " +  nomeBusca +"\n\n")
     if(lista_registros == None):
         print("\nRegistro não encontrado.\n")
     else:
-        insertion_sort(lista_registros,ordem)
+       # insertion_sort(lista_registros,ordem)
         listaOrdem = quicksort(lista_registros,ordem)
         i=0
-        for registro in lista_registros[:numMaxCandidatos]:
+        for registro in listaOrdem[:numMaxCandidatos]:
            i=i+1
            print("=============="+str(i)+"============\n")
            print("Nome: %s\n" % (registro.nome))
@@ -303,7 +327,7 @@ def print_list(lista_registros, numMaxCandidatos,ordem):
            arquivo.write("Partido: " + (registro.nomePartido)+"\n")
            arquivo.write("Instrução: " + (registro.grauInstrucao)+"\n")
            arquivo.write("Ocupação: " + (registro.ocupacao)+"\n")
-           arquivo.write("Situação após eleição: " + (registro.situacaoPosEleicao)+"\n")
+           arquivo.write("Situação após eleição: " + (registro.situacaoPosEleicao)+"\n\n")
 
         arquivo.close()
                 

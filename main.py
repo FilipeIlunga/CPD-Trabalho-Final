@@ -35,6 +35,7 @@ def printMenu(menu):
         print("GRAU DE INSTRUÇÃO.\n")
         print("\t[5]  Decrescente\n")
         print("\t[6]  Crescente.\n")
+        print("\n[0] BUSCAR OUTRO CANDIDATO")
     else:
         print("\n\nORDENAR POR:")
         print("IDADE\n")
@@ -46,7 +47,7 @@ def printMenu(menu):
         print("GRAU DE INSTRUÇÃO.\n")
         print("\t[5]  Decrescente\n")
         print("\t[6]  Crescente.\n")
-        print("\n\t[0] BUSCAR OUTRO CANDIDATO")
+        print("\n[0] BUSCAR OUTRO CANDIDATO")
 
 
 def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
@@ -54,58 +55,69 @@ def candidato(name_archive, nomeCandidato, numMaxCandidatos,menuPrint):
     menu=1
     while menu!= 0:
         printMenu(menuPrint)
+
         menu = int(input())
         if menu == 0:
-            break
+            return
         #função lê o arquivo e retorna os dados do candidato
         list_cand = []
+
         f = open(name_archive + "data_candidato_index.bin", 'rb')
+
         tree = pickle.load(f)
         nomeCandidato = nomeCandidato.lower()
+
         list_cand = list_candidato(nomeCandidato, tree, name_archive)
-        print_list(list_cand, numMaxCandidatos,menu)
+        print_list(list_cand, numMaxCandidatos,menu,menuPrint,nomeCandidato)
+        
         f.close()
 
 
 def ocupacao(name_archive, ocupacaoCandidato, numMaxCandidatos,menuPrint):
 
-    printMenu(menuPrint)
-    
-    menu = int(input())
-    #função lê o arquivo e retorna os dados do candidato da ocupação informada
-    list_cand = []
+    menu = 1
+    while menu != 0:
+        printMenu(menuPrint)
 
-    f = open(name_archive + "data_ocupacao_index.bin", 'rb')
+        menu = int(input())
+        if menu == 0:
+            return
+        #função lê o arquivo e retorna os dados do candidato
+        list_cand = []
 
-    tree = pickle.load(f)
+        f = open(name_archive + "data_ocupacao_index.bin", 'rb')
 
-    ocupacaoCandidato = ocupacaoCandidato.lower()
+        tree = pickle.load(f)
+        ocupacaoCandidato = ocupacaoCandidato.lower()
 
-    list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
+        list_cand = list_candidato(ocupacaoCandidato, tree, name_archive)
+        print_list(list_cand, numMaxCandidatos, menu,
+                   menuPrint, ocupacaoCandidato)
 
-    print_list(list_cand, numMaxCandidatos,menu)
-
-    f.close()
+        f.close()
 
 
 def cargo(name_archive, cargoCandidato, numMaxCandidatos,menuPrint):
 
-    printMenu(menuPrint)
-    
-    menu = int(input())
-    #função lê o arquivo e retorna os dados do candidato que disputou o cargo informado
+    menu = 1
+    while menu != 0:
+        printMenu(menuPrint)
 
-    list_cand = []
+        menu = int(input())
+        if menu == 0:
+            return
+        #função lê o arquivo e retorna os dados do candidato
+        list_cand = []
 
-    f = open(name_archive + "data_cargo_index.bin", 'rb')
+        f = open(name_archive + "data_cargo_index.bin", 'rb')
 
-    tree = pickle.load(f)
-    cargoCandidato = cargoCandidato.lower()
-    list_cand = list_candidato(cargoCandidato, tree, name_archive)
+        tree = pickle.load(f)
+        cargoCandidato = cargoCandidato.lower()
 
-    print_list(list_cand, numMaxCandidatos,menu)
+        list_cand = list_candidato(cargoCandidato, tree, name_archive)
+        print_list(list_cand, numMaxCandidatos, menu,menuPrint, cargoCandidato)
 
-    f.close()
+        f.close()
 
 def abrirArq():
     try:
