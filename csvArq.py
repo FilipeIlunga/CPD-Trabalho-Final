@@ -10,9 +10,6 @@ import hashlib
 # Para utilizar protocolos binários para serializar objetos      {.dump(), .load()}
 import pickle
 #--coding: ANSI - -
-from random import seed
-from random import randint
-import time
 
 class Register(object):
     def __init__(self, offset=0, info=[]):
@@ -45,7 +42,6 @@ class Register(object):
 
     def __repr__(self):
         return "%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%s\t%d\t%s\t%s\t%s\t%d\t%s" % (str(self.unidadeEleitoral), str(self.CODcargo), str(self.cargo), str(self.numero), str(self.nome), str(self.cpf), str(self.numeroPartido), str(self.siglaPartido), str(self.nomePartido), str(self.municipioNascimento), str(self.dataNascimento), str(self.Idade), str(self.CODgenero), str(self.genero), str(self.CODgrauInstrucao), str(self.grauInstrucao), str(self.cor), str(self.ocupacao), str(self.CODsituacaoPosEleicao), str(self.situacaoPosEleicao))
-
 class NodeTrie(object):
     def __init__(self, value, children_right=None, children_left=None, offsets=[], rest_word=[]):
         self.value = value            # parte do código que o nodo representa
@@ -54,8 +50,7 @@ class NodeTrie(object):
         self.offsets = offsets          # offset em outro arquivo
         # resto da palavra/código (se houver) na folha
         self.rest_word = rest_word
-########
-
+#######
     def search(self, code_bin):                 # procura um código binário na árvore - Trie
 
         if code_bin[0] == '0':
@@ -102,7 +97,6 @@ class NodeTrie(object):
                 self.children_right.rest_word = word
 
     def AddNodeWord(self, word, offset):
-
         # coloca string na função hash, (Unicode-objects must be encoded before hashing)
         hash_w = hashlib.md5(word.encode())
         # Devolve o código em hexadecimal, transforma em inteiro e então em bits (string)
@@ -118,14 +112,12 @@ class NodeTrie(object):
         else:
             self.AddCodeBin(hash_w_bin, word, offset)
 
-
 def normalize(word):
     aux_word = word.lower()  # normaliza a palavra, todas letras em minusculo
 
     word_list = re.sub("[\W]", " ", aux_word).split()
 
     return word_list
-
 
 # monta arquivos invertidos, que armazenam os indices em árvores Trie.
 def make_index_files(lista_registros, handler):
@@ -172,7 +164,6 @@ def make_index_files(lista_registros, handler):
     f_partido.close()
     f_cargo.close()
 
-
 def search_candidato(offset, name_file):
 
     handler = open(name_file + 'Data.bin', 'rb')
@@ -180,11 +171,8 @@ def search_candidato(offset, name_file):
         pickle.load(handler)
 
     r = pickle.load(handler)
-
     handler.close()
-
     return r
-
 
 def list_candidato(word, tree, name_file):
     n = []
@@ -207,34 +195,6 @@ def list_candidato(word, tree, name_file):
         return None
 
 #ordena os candidatos por cargo disputado, presidente, vice, governador ...
-def insertion_sort(lista_registro, ordem):
-   
-    for i in range(len(lista_registro)):
-        iterator = lista_registro[i]
-        j = i
-
-        if ordem == 1:
-            ordenacao = iterator.Idade > lista_registro[j - 1].Idade
-        elif ordem == 2:
-            ordenacao = iterator.Idade < lista_registro[j - 1].Idade
-        elif ordem == 3:
-            ordenacao = iterator.CODcargo < lista_registro[j - 1].CODcargo
-        elif ordem == 4:
-            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
-        elif ordem == 5:
-            ordenacao = iterator.CODgrauInstrucao > lista_registro[j - 1].CODgrauInstrucao
-        elif ordem == 6:
-            ordenacao = iterator.CODgrauInstrucao < lista_registro[j - 1].CODgrauInstrucao
-        else:
-            print("COMANDO INVALIDO, ORDEM POR CARGO SERÁ SEGUIDA\n\n")
-            ordenacao = iterator.CODcargo > lista_registro[j - 1].CODcargo
-        while j > 0 and ordenacao:
-            lista_registro[j] = lista_registro[j-1]
-            j -= 1
-        lista_registro[j] = iterator
-
-
-
 def quicksort(registro,ordem):
     if len(registro) == 1 or len(registro) == 0:
         return registro
@@ -273,7 +233,6 @@ def quicksort(registro,ordem):
         second_part = quicksort(registro[i+1:],ordem)
         first_part.append(registro[i])
         return first_part + second_part
-
 
 def print_list(lista_registros, numMaxCandidatos,ordem,busca,nomeBusca):
     arquivo = open("saida.txt", "w", encoding="utf-8")

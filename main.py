@@ -70,7 +70,6 @@ def menuOrdem(menuPrint, list_cand, nomeCandidato):
 def candidato(name_archive, nomeCandidato,menuPrint):
     
     list_cand = []
-
     f = open(name_archive + "data_candidato_index.bin", 'rb')
     tree = pickle.load(f)
     nomeCandidato = nomeCandidato.lower()
@@ -79,11 +78,9 @@ def candidato(name_archive, nomeCandidato,menuPrint):
     f.close()
     menuOrdem(menuPrint, list_cand, nomeCandidato)
 
-
 def ocupacao(name_archive, ocupacaoCandidato,menuPrint):
 
     list_cand = []
-
     f = open(name_archive + "data_ocupacao_index.bin", 'rb')
     tree = pickle.load(f)
     ocupacaoCandidato = ocupacaoCandidato.lower()
@@ -97,7 +94,6 @@ def ocupacao(name_archive, ocupacaoCandidato,menuPrint):
 def cargo(name_archive, cargoCandidato,menuPrint):
 
     list_cand = []
-
     f = open(name_archive + "data_cargo_index.bin", 'rb')
     tree = pickle.load(f)
     cargoCandidato = cargoCandidato.lower()
@@ -110,13 +106,10 @@ def abrirArq():
     try:
         handler = input("Nome do arquivo base:")
         f = open(handler + ".csv", 'r', errors='ignore', encoding="UTF-8")
-
         return [f, handler]
-
     except:
         print("\nEste arquivo não existe, tente de novo\n")
         return abrirArq()
-
 
 Registers = []
 files = []
@@ -130,7 +123,6 @@ handler = k[1]
 del k
 # parte de processamento do arquivo.
 offset = 0
-
 if os.path.isfile(handler + 'Data.bin') == False:
     with open(handler + 'Data.bin', "wb") as handler_data:
         for line in csv.reader(f, dialect='excel', delimiter=';'):
@@ -147,10 +139,9 @@ if os.path.isfile(handler + 'Data.bin') == False:
                 pickle.dump(newElement, handler_data, pickle.HIGHEST_PROTOCOL)
 
                 offset += 1
-
     f.close()
     make_index_files(Registers, handler)
-
+    
 print("\nArquivo " + handler + " aberto e processado com sucesso\n")
 
 menu = 1
